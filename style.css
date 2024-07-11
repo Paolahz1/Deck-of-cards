@@ -18,10 +18,6 @@ body {
     flex-wrap: wrap;
 }
 
-.item{
-    border: 2px solid;
-    border-color: black;
-}
 
 [data-suit= "♥"],
 [data-suit = "♦"]{
