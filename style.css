@@ -1,0 +1,240 @@
+body {
+    background-color: rgb(28, 139, 28);
+}
+
+.card {
+    
+    width: 125px;
+    height: 200px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 16px 8px;
+    margin: 5px;
+    font-size: 45px;
+}
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item{
+    border: 2px solid;
+    border-color: black;
+}
+
+[data-suit= "♥"],
+[data-suit = "♦"]{
+    color: rgb(219, 41, 41)
+}
+
+[data-card = '1']{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 92px;
+}
+
+[data-card = '2'],
+[data-card = '3']{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+[data-card = '4']{
+    display: grid;
+    grid-template-columns:  repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    place-items: center;    
+}
+
+
+/* [data-card = '4'] .item:nth-child(2){
+    background-color: aqua;
+    
+} */
+
+[data-card = '5']{
+    display: grid;
+    place-items: center;
+    grid-template-areas:
+
+    "a . b"
+    ". c ."
+    "d . e";
+
+    & .item:nth-child(1){
+        grid-area: a;
+    }
+    
+    .item:nth-child(2){
+        grid-area: b;
+    }
+    
+    .item:nth-child(3){
+        grid-area: c;
+    }
+    
+    .item:nth-child(4){
+        grid-area: d;
+    }
+    
+    .item:nth-child(5) {
+        grid-area:e ;
+    }
+}
+
+[data-card ='6'],
+[data-card ='7'],
+[data-card ='8']{
+    display: grid;
+    grid-template:  repeat(3, 1fr) / repeat(2, 1fr);
+    place-items: center;
+}
+
+
+[data-card ='7'],
+[data-card ='8']{    
+    position: relative;
+    & .item:nth-child(1){
+        position: absolute;
+        top: 20%
+    }
+}
+
+
+[data-card ='8']{   
+    & .item:nth-child(2){
+        position: absolute;
+        bottom: 20%
+    }
+}
+
+[data-card = '9'],
+[data-card = '10']{
+    display: grid;
+    grid-template: repeat(4, 25%)/ repeat(2, 1fr) ;
+    place-items: center;
+    position: relative;
+
+    & .item:nth-child(1){
+        position: absolute;
+
+    }
+}
+
+[data-card = '10']{
+    .item:nth-child(1){
+        position: absolute;
+        top: 15%;
+    }
+    
+    .item:nth-child(2){
+        position: absolute;
+        bottom: 15%;
+    }
+}
+
+
+[data-card = "2"] .item:nth-child(2),
+[data-card = "3"] .item:nth-child(3),
+[data-card = "4"] .item:nth-child(n+3),
+[data-card = "5"] .item:nth-child(n+4),
+[data-card = "6"] .item:nth-child(n+5),
+[data-card = "7"] .item:nth-child(n+5),
+[data-card = "8"] .item:nth-child(n+6),
+[data-card = "9"] .item:nth-child(n+6),
+[data-card = "10"] .item:nth-child(n+6){
+    transform:  translateY(8px) scaleY(-1)
+}
+
+
+[data-card = "J"],
+[data-card = "K"],
+[data-card = "Q"]{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .item {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 30px 12px;
+    }    
+}
+
+[data-card] {
+
+    position: relative;
+
+    &::before, &::after {
+        content: attr(data-card) attr(data-suit);
+        font-size: 17px;
+        position: absolute;
+    }
+    &::before {
+        top: 4px;
+        left: 4px;
+    }
+    &::after{
+        bottom: 4px;
+        right: 4px;
+        transform: rotate(180deg);
+    }
+}
+
+
+/* Para movil */
+
+@media screen and (max-width: 800px) {
+    .card::after, .item {
+        display: none;
+    }
+
+    .card{
+        width: 38px;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card::before{
+        position: static;
+        font-size: 24px;
+    }
+}
+
+.card:hover {
+    box-shadow: 2px 8px 10px;
+    transform: translate(-1px, -6px);
+    transition: 0.2s ease;
+}
+
+
+.flipped{
+    .item, 
+    &::before,
+    &::after {
+        display: none;
+    }
+}
+
+.example {
+    margin-top: 10px;
+    color: rgb(9, 9, 70);
+
+    &::before{
+        content: "Realizado por: ";
+        color: rgb(205, 224, 28);
+                
+    }
+    &::after{
+        content: " ♥♥♥♥";
+        color: red;    
+    }
+}
+
+
